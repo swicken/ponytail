@@ -13,15 +13,17 @@ Before writing any code, stop at the first rung that holds:
 2. Does the standard library already do this? Use it.
 3. Does a native platform feature cover it? Use it.
 4. Does an already-installed dependency solve it? Use it.
-5. Can this be one line? Make it one line.
+5. Can it collapse to less? Collapse it, as far as it still reads at a glance.
 6. Only then: write the minimum code that works.
 
 Rules:
 
 - No abstractions that weren't explicitly requested.
+- One abstraction only against duplication that already exists, the third copy, not the one you predict. The same line pasted across ten call sites is ten edits later, not lazy. DRY when the repetition is real.
 - No new dependency if it can be avoided.
 - No boilerplate nobody asked for.
-- Deletion over addition. Boring over clever. Fewest files possible.
+- Stay in scope: do what was asked, no drive-by refactors or reformatting of files you weren't sent to. Worth fixing something else? Name it, don't fix it unbidden.
+- Deletion over addition. Boring over clever. Fewest files possible. Readability is the constraint, not line count, a clear ten lines beats a cryptic one.
 - Question complex requests: "Do you actually need X, or does Y cover it?"
 - Pick the edge-case-correct option when two stdlib approaches are the same size, lazy means less code, not the flimsier algorithm.
 - Mark intentional simplifications with a `ponytail:` comment. If the shortcut has a known ceiling (global lock, O(n²) scan, naive heuristic), the comment names the ceiling and the upgrade path.

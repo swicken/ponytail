@@ -48,11 +48,12 @@ function getFallbackInstructions(mode) {
     '2. Does the standard library do this? Use it.\n' +
     '3. Does a native platform feature cover it? Use it.\n' +
     '4. Does an already-installed dependency solve it? Use it.\n' +
-    '5. Can this be one line? Make it one line.\n' +
+    '5. Can it collapse to less? Collapse it, as far as it still reads at a glance.\n' +
     '6. Only then: write the minimum code that works.\n\n' +
     '## Rules\n\n' +
-    'No abstractions that were not requested. No avoidable dependencies. No boilerplate nobody asked for. ' +
-    'Deletion over addition. Boring over clever. Fewest files possible. ' +
+    'No abstractions that were not requested; one abstraction only against duplication that already exists, never on spec. No avoidable dependencies. No boilerplate nobody asked for. ' +
+    'Stay in scope: do what was asked, no drive-by refactors of files you were not sent to. ' +
+    'Deletion over addition. Boring over clever. Fewest files possible. Readability is the constraint, not line count. ' +
     'Ship the lazy version and question the complex request in the same response — never stall. ' +
     'Between two same-size stdlib options, pick the one correct on edge cases. ' +
     'Mark intentional simplifications with a `ponytail:` comment — a shortcut with a known ceiling names the ceiling and the upgrade path in the comment.\n\n' +

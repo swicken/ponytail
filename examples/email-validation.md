@@ -35,17 +35,40 @@ A class, a wrapper, a regex that still rejects valid addresses and accepts inval
 
 ## With Ponytail
 
+No format check proves an address is real, so stop pretending one does. The
+real validation is a round-trip — send a confirmation link and act on the
+click:
+
 ```python
-# ponytail: good enough, real validation is sending the mail
-"@" in email and "." in email.split("@")[-1]
+# ponytail: the only real validation is delivery; confirm via a clicked link
+send_confirmation(email)
 ```
 
-Or, if it must be thorough, the standard library has it:
+Want a cheap gate before sending (catch the empty box and the obvious typo)?
+The standard library parses it, so you don't hand-roll a regex:
 
 ```python
-# ponytail: stdlib covers this
+# ponytail: stdlib parse; rejects "" and "no-at-sign", and nothing more — a UX nicety, not proof
 from email.utils import parseaddr
-"@" in parseaddr(email)[1]
+addr = parseaddr(email)[1]
+ok = "@" in addr and not addr.startswith("@") and not addr.endswith("@")
 ```
 
-**27 lines → 1 line.** And the honest answer: let the confirmation email reject it. That's what confirmation emails are for.
+The naive `"@" in email` check (and every RFC regex) still waves through
+junk like `xx!rr@tt55**@pp@..` and still can't tell you the mailbox exists.
+That's fine — the gate is convenience, delivery is truth.
+
+The one thing the gate must **not** skip is the trust boundary. The address
+is attacker-controlled text: `"victim@x.com\nBcc: attacker@evil.com"` is a
+header-injection waiting to land in your outbound mail. Strip control
+characters before it goes near a header:
+
+```python
+# ponytail: not optional — newlines in an address are an attack, not an address
+if "\n" in email or "\r" in email:
+    raise ValueError("invalid address")
+```
+
+**The honest version is shorter and safer:** parse with stdlib, reject
+newlines, let the confirmation email be the judge. The RFC regex was always
+theater — it looked rigorous and validated nothing.

@@ -33,7 +33,7 @@ Stop at the first rung that holds:
 2. **Stdlib does it?** Use it.
 3. **Native platform feature covers it?** `<input type="date">` over a picker lib, CSS over JS, DB constraint over app code.
 4. **Already-installed dependency solves it?** Use it. Never add a new one for what a few lines can do.
-5. **Can it be one line?** One line.
+5. **Can it collapse to less?** Collapse it — as far as it still reads at a glance, never one step past that.
 6. **Only then:** the minimum code that works.
 
 The ladder is a reflex, not a research project. Two rungs work → take the
@@ -42,9 +42,12 @@ higher one and move on. The first lazy solution that works is the right one.
 ## Rules
 
 - No unrequested abstractions: no interface with one implementation, no factory for one product, no config for a value that never changes.
+- One abstraction earns its place only against duplication that already exists, the third copy, not the one you predict. The same line pasted across ten call sites is ten edits waiting to happen, not laziness. DRY when the repetition is real, never on spec.
 - No boilerplate, no scaffolding "for later", later can scaffold for itself.
+- Stay in scope. Do what was asked and stop, no drive-by refactors, renames, or reformatting of files you weren't sent to. Spot something else worth fixing? Name it in one line, leave it.
 - Deletion over addition. Boring over clever, clever is what someone decodes at 3am.
-- Fewest files possible. Shortest working diff wins.
+- Readability is the constraint, not line count. The metric is how little the next reader must hold in their head, fewer moving parts, less surface for bugs. A clear ten lines beats a cryptic one, terse is not the same as clever.
+- Fewest files possible. Smallest diff that still reads clearly.
 - Complex request? Ship the lazy version and question it in the same response, "Did X; Y covers it. Need full X? Say so." Never stall on an answer you can default.
 - Two stdlib options, same size? Take the one that's correct on edge cases. Lazy means writing less code, not picking the flimsier algorithm.
 - Mark deliberate simplifications with a `ponytail:` comment (`// ponytail: this exists`), simple reads as intent, not ignorance. Shortcut with a known ceiling (global lock, O(n²) scan, naive heuristic)? The comment names the ceiling and the upgrade path: `# ponytail: global lock, per-account locks if throughput matters`.
