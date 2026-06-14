@@ -35,6 +35,10 @@ first, cuts second.
 - `yagni:` abstraction with one implementation, config nobody sets, layer with one caller.
 - `shrink:` same logic, fewer lines. Show the shorter form.
 
+When a finding is both a cut and a danger — unescaped CSV (`stdlib:`) that
+corrupts data, a "dead" check (`delete:`) that was the only authz — tag it by
+the worse outcome so it sorts with the dangers. Worst consequence wins the tag.
+
 ## Examples
 
 ❌ "This EmailValidator class might be more complex than necessary, have you
