@@ -26,7 +26,7 @@ Level sticks until changed or session end.
 | Skill | Trigger | What it does |
 |-------|---------|--------------|
 | **ponytail** | `/ponytail` | Lazy mode itself. Simplest solution that works. |
-| **ponytail-review** | `/ponytail-review` | Over-engineering review: `L42: yagni: factory, one product. Inline.` |
+| **ponytail-review** | `/ponytail-review [PR#] [--comment]` | Senior review of a diff or PR: prod-killers first, then cuts. `L40: security: raw input in a header. Strip \r\n.` / `L42: yagni: factory, one product. Inline.` |
 | **ponytail-help** | `/ponytail-help` | This card. |
 
 Codex uses `@ponytail`, `@ponytail-review`, and `@ponytail-help`; Claude Code

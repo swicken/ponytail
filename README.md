@@ -144,7 +144,7 @@ Loads the ruleset as always-on context every session and registers `/ponytail` a
 
 That was it. He'd be proud. He won't say it.
 
-Active every session. `/ponytail-review` finds what to delete in your diff, `/ponytail-audit` does the same for the whole repo. `/ponytail ultra` exists for when the codebase has wronged you personally. `/ponytail-help` explains the rest.
+Active every session. `/ponytail-review` reviews your diff or a GitHub PR the way a senior who's been paged at 3am would — what kills prod first (security, data-loss, real duplication, footguns), then what to delete; `/ponytail-audit` hunts over-engineering across the whole repo. `/ponytail ultra` exists for when the codebase has wronged you personally. `/ponytail-help` explains the rest.
 
 In Codex, invoke the skills as `@ponytail`, `@ponytail-review`,
 `@ponytail-audit`, and `@ponytail-help`. Startup and mode-change text shows the
