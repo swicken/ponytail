@@ -27,11 +27,12 @@ Level sticks until changed or session end.
 |-------|---------|--------------|
 | **ponytail** | `/ponytail` | Lazy mode itself. Simplest solution that works. |
 | **ponytail-review** | `/ponytail-review [PR#] [--comment]` | Senior review of a diff or PR: prod-killers first, then cuts. `L40: security: raw input in a header. Strip \r\n.` / `L42: yagni: factory, one product. Inline.` |
+| **ponytail-audit** | `/ponytail-audit` | Whole-repo deletion scan: what to delete, simplify, de-duplicate, ranked by payoff. One-shot, applies nothing. |
 | **ponytail-help** | `/ponytail-help` | This card. |
 
-Codex uses `@ponytail`, `@ponytail-review`, and `@ponytail-help`; Claude Code
-and OpenCode use the slash-command forms above (OpenCode ships `/ponytail` and
-`/ponytail-review`).
+Codex uses `@ponytail`, `@ponytail-review`, `@ponytail-audit`, and
+`@ponytail-help`; Claude Code and OpenCode use the slash-command forms above
+(OpenCode ships `/ponytail`, `/ponytail-review`, and `/ponytail-audit`).
 
 ## Deactivate
 
