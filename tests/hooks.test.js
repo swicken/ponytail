@@ -49,6 +49,16 @@ assert.equal(result.status, 0, result.stderr);
 assert.equal(fs.readFileSync(codexState, 'utf8'), 'lite');
 output = JSON.parse(result.stdout);
 assert.equal(output.systemMessage, 'PONYTAIL:LITE');
+// A mid-session switch must re-inject the ruleset filtered to the new level,
+// not just flip the badge. "name the lazier alternative" is lite-only text.
+assert.match(
+  output.hookSpecificOutput.additionalContext,
+  /PONYTAIL MODE CHANGED — level: lite/,
+);
+assert.match(
+  output.hookSpecificOutput.additionalContext,
+  /name the lazier alternative/,
+);
 
 result = run(
   'ponytail-mode-tracker.js',

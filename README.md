@@ -160,10 +160,12 @@ Which files map to which agent: [Agent portability](docs/agent-portability.md).
 
 ## Development
 
-When changing the compact rule text, keep the agent copies aligned:
+`AGENTS.md` is the single source for the compact rule copies. After editing it,
+regenerate the per-agent copies (Cursor, Windsurf, Cline, Copilot, Kiro):
 
 ```bash
-node scripts/check-rule-copies.js
+node scripts/sync-rule-copies.js          # regenerate the copies
+node scripts/sync-rule-copies.js --check  # verify they're in sync (CI)
 ```
 
 ## Credits

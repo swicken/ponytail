@@ -3,6 +3,7 @@
 // Inspects user input for /ponytail commands and writes mode to flag file
 
 const { getDefaultMode } = require('./ponytail-config');
+const { getPonytailInstructions } = require('./ponytail-instructions');
 const { clearMode, setMode, writeHookOutput } = require('./ponytail-runtime');
 
 let input = '';
@@ -33,10 +34,13 @@ process.stdin.on('end', () => {
 
       if (mode && mode !== 'off') {
         setMode(mode);
+        // Re-inject the ruleset filtered to the new level. SessionStart only loaded
+        // the startup level, so without this a mid-session switch moves the badge but
+        // not the rules the model actually sees.
         writeHookOutput(
           'UserPromptSubmit',
           mode,
-          'PONYTAIL MODE CHANGED — level: ' + mode,
+          'PONYTAIL MODE CHANGED — level: ' + mode + '\n\n' + getPonytailInstructions(mode),
         );
       } else if (mode === 'off') {
         clearMode();

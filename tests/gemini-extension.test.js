@@ -19,7 +19,7 @@ const PINNED_SEMVER = /^\d+\.\d+\.\d+$/;
 // Gemini auto-discovers these by directory; the manifest is only useful if they exist.
 const REUSED_COMMANDS = ['commands/ponytail.toml', 'commands/ponytail-review.toml'];
 const REUSED_SKILLS = ['skills/ponytail/SKILL.md'];
-// Same load-bearing phrases asserted by scripts/check-rule-copies.js: the file
+// Same load-bearing phrases asserted by scripts/sync-rule-copies.js: the file
 // contextFileName points at must actually carry the rules, not just exist.
 const RULE_INVARIANTS = [
   'lazy senior',

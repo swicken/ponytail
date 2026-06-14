@@ -1,13 +1,13 @@
 {
   "name": "ponytail",
-  "version": "4.2.0",
-  "description": "Lazy senior dev mode. Forces the simplest, shortest solution that actually works: YAGNI, stdlib first, no unrequested abstractions.",
+  "version": "4.3.1",
+  "description": "Lazy senior dev mode. Forces the simplest, shortest solution that actually works: YAGNI, stdlib first, scope control, readability over line count.",
   "author": {
-    "name": "Dietrich Gebert",
-    "url": "https://github.com/DietrichGebert"
+    "name": "Scott Wicken",
+    "url": "https://github.com/swicken"
   },
-  "homepage": "https://github.com/DietrichGebert/ponytail",
-  "repository": "https://github.com/DietrichGebert/ponytail",
+  "homepage": "https://github.com/swicken/ponytail",
+  "repository": "https://github.com/swicken/ponytail",
   "license": "MIT",
   "keywords": ["yagni", "minimalism", "code-review", "productivity"],
   "skills": "./skills/",
@@ -15,10 +15,10 @@
     "displayName": "Ponytail",
     "shortDescription": "Lazy senior developer mode",
     "longDescription": "Prefer YAGNI, the standard library, native platform features, and the smallest correct implementation.",
-    "developerName": "Dietrich Gebert",
+    "developerName": "Scott Wicken",
     "category": "Productivity",
     "capabilities": ["Instructions", "Lifecycle hooks"],
-    "websiteURL": "https://github.com/DietrichGebert/ponytail",
+    "websiteURL": "https://github.com/swicken/ponytail",
     "defaultPrompt": [
       "Use Ponytail mode for this task.",
       "Review this diff for over-engineering.",
