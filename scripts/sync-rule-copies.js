@@ -66,6 +66,9 @@ const INVARIANTS = [
   'ONE runnable check',                    // test reflex
   'flimsier algorithm',                    // robust-variant rule
   'input validation at trust boundaries',  // the "not lazy about" clause
+  'Look before you write',                 // reuse rung
+  'wrong place is a second bug',           // comprehension-first guard
+  'root cause, not symptom',               // bug-fix rule
 ];
 
 const skill = read('skills/ponytail/SKILL.md');

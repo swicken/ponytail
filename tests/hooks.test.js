@@ -60,6 +60,59 @@ assert.match(
   /name the lazier alternative/,
 );
 
+// Bare /ponytail reports the active level without resetting it (default is
+// ultra here; the live mode is lite and must survive).
+result = run(
+  'ponytail-mode-tracker.js',
+  codexEnv,
+  JSON.stringify({ prompt: '/ponytail' }),
+);
+assert.equal(result.status, 0, result.stderr);
+assert.equal(fs.readFileSync(codexState, 'utf8'), 'lite');
+output = JSON.parse(result.stdout);
+assert.match(
+  output.hookSpecificOutput.additionalContext,
+  /PONYTAIL MODE ACTIVE — level: lite/,
+);
+
+// "stop ponytail" mid-sentence must NOT deactivate.
+result = run(
+  'ponytail-mode-tracker.js',
+  codexEnv,
+  JSON.stringify({ prompt: "please don't stop ponytail here" }),
+);
+assert.equal(result.status, 0, result.stderr);
+assert.equal(fs.readFileSync(codexState, 'utf8'), 'lite');
+assert.equal(result.stdout, '');
+
+// /ponytail default <mode> persists to the config file, leaves the live mode alone.
+result = run(
+  'ponytail-mode-tracker.js',
+  { ...codexEnv, XDG_CONFIG_HOME: path.join(temp, 'xdg') },
+  JSON.stringify({ prompt: '/ponytail default full' }),
+);
+assert.equal(result.status, 0, result.stderr);
+assert.equal(fs.readFileSync(codexState, 'utf8'), 'lite');
+assert.deepEqual(
+  JSON.parse(fs.readFileSync(path.join(temp, 'xdg', 'ponytail', 'config.json'), 'utf8')),
+  { defaultMode: 'full' },
+);
+output = JSON.parse(result.stdout);
+assert.match(
+  output.hookSpecificOutput.additionalContext,
+  /PONYTAIL DEFAULT SET/,
+);
+
+// SubagentStart injects the active ruleset into spawned agents.
+result = run('ponytail-subagent.js', codexEnv);
+assert.equal(result.status, 0, result.stderr);
+output = JSON.parse(result.stdout);
+assert.equal(output.systemMessage, 'PONYTAIL:LITE');
+assert.match(
+  output.hookSpecificOutput.additionalContext,
+  /name the lazier alternative/,
+);
+
 result = run(
   'ponytail-mode-tracker.js',
   codexEnv,
@@ -69,6 +122,11 @@ assert.equal(result.status, 0, result.stderr);
 assert.equal(fs.existsSync(codexState), false);
 output = JSON.parse(result.stdout);
 assert.equal(output.systemMessage, 'PONYTAIL:OFF');
+
+// No active mode → SubagentStart injects nothing.
+result = run('ponytail-subagent.js', codexEnv);
+assert.equal(result.status, 0, result.stderr);
+assert.equal(result.stdout, '');
 
 const claudeEnv = {
   HOME: home,

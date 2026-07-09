@@ -16,10 +16,11 @@ write flag files, or persist anything.
 | Level | Trigger | What change |
 |-------|---------|-------------|
 | **Lite** | `/ponytail lite` | Build what's asked, name the lazier alternative in one line. |
-| **Full** | `/ponytail` | The ladder enforced: YAGNI → stdlib → native → one line → minimum. Default. |
+| **Full** | `/ponytail full` | The ladder enforced: YAGNI → reuse → stdlib → native → collapse → minimum. Default. |
 | **Ultra** | `/ponytail ultra` | YAGNI extremist. Deletion before addition. Challenges requirements before building. |
 
-Level sticks until changed or session end.
+Level sticks until changed or session end. Bare `/ponytail` reports the
+active level without changing it.
 
 ## Skills
 
@@ -36,12 +37,16 @@ Codex uses `@ponytail`, `@ponytail-review`, `@ponytail-audit`, and
 
 ## Deactivate
 
-Say "stop ponytail" or "normal mode". Resume anytime with `/ponytail`.
-`/ponytail off` also works.
+Say "stop ponytail" or "normal mode" (on its own — mid-sentence mentions
+don't count). Resume anytime with `/ponytail <level>`. `/ponytail off` also
+works.
 
 ## Configure Default Mode
 
 Default mode = `full`, auto-active every session. Change it:
+
+**Command** (easiest): `/ponytail default lite|full|ultra|off` — persists to
+the config file below.
 
 **Environment variable** (highest priority):
 ```bash

@@ -54,6 +54,15 @@ test('/ponytail off persists off and transform injects nothing', async () => {
   assert.deepEqual(system, []);
 });
 
+test('bare or invalid /ponytail arguments do not clobber the level', async () => {
+  const hooks = await loadPlugin({});
+  await hooks['command.execute.before']({ command: 'ponytail', arguments: 'ultra', sessionID: 's' });
+  await hooks['command.execute.before']({ command: 'ponytail', arguments: '', sessionID: 's' });
+  await hooks['command.execute.before']({ command: 'ponytail', arguments: 'bogus', sessionID: 's' });
+  await hooks['command.execute.before']({ command: 'ponytail', arguments: 42, sessionID: 's' });
+  assert.equal(fs.readFileSync(statePath, 'utf8'), 'ultra');
+});
+
 test('unrelated commands do not touch the flag', async () => {
   try { fs.unlinkSync(statePath); } catch (e) {}
   const hooks = await loadPlugin({});
