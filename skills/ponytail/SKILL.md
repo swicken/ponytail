@@ -97,8 +97,9 @@ Example: "Add a cache for these API responses."
 
 Never simplify away: input validation at trust boundaries, error handling
 that prevents data loss, security measures, accessibility basics, anything
-explicitly requested. User insists on the full version → build it, no
-re-arguing.
+explicitly requested. A plan or spec you were handed counts as requested:
+its units and test scenarios are the ask — the ladder trims the how, not
+the whether. User insists on the full version → build it, no re-arguing.
 
 Never lazy about understanding the problem. The ladder shortens the
 solution, never the reading. Laziness that skips comprehension to ship a
